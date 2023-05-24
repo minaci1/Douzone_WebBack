@@ -1,4 +1,5 @@
 package UTILS;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -6,76 +7,75 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class SingletonHelper {
-	private static Connection conn = null; //public > private
+
+	private static Connection conn;
+
 	private SingletonHelper() {}
-	public static Connection getConnection(String dsn) {
-		if(conn != null) {
-			//System.out.println("conn is not null");
-			return conn;
-		}
+
+	public static Connection getConnection(String dsn) { // 어떤 자원을 쓸지를 받는다
+
+		if (conn != null) return conn;
+
 		try {
-			  if(dsn.equals("oracle")) {
-				  Class.forName("oracle.jdbc.OracleDriver");
-				  conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE","KOSA","1004");
-			  }else if(dsn.equals("mysql")) {
-				  Class.forName("com.mysql.cj.jdbc.Driver");
-				  conn = DriverManager.getConnection("jdbc:mysql://192.168.0.3:3306/sampledb?characterEncoding=UTF-8&serverTimezone=UTC&useSSL=true","kosta","1004");
-			  }
-		}catch(Exception e) {
+			if (dsn.equals("oracle")) {
+				Class.forName("oracle.jdbc.OracleDriver");
+				conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "KOSA", "1004");
+			} else if (dsn.equals("mariadb")) {
+				Class.forName("oracle.jdbc.OracleDriver");
+				conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/kosadb", "kosa", "1004");
+			}
+		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		//System.out.println("conn return");
-		return conn; 
+		return conn;
 	}
- 
+
 	public static void dbClose() {
-		if(conn != null) {
+		if (conn != null) {
 			try {
-				 conn.close();//�������� (DB ���� ����)
-				 conn = null; //������  null ���´�  
-			}catch(Exception e) {
+				conn.close(); // 연결해제(DB연결 끊기)
+				conn = null; // 참조해제(null)
+			} catch (Exception e) {
 				System.out.println(e.getMessage());
 			}
 		}
 	}
 
-     public static void close(Connection conn) {
-
-		if(conn != null) {
+	public static void close(Connection conn) {
+		if (conn != null) {
 			try {
 				conn.close();
-			}catch(Exception e) {
-				System.out.println(e.getMessage());
-			}
-		}
-	}
-
-	
-	public static void close(Statement stmt) {
-		if(stmt != null) {
-			try {
-				stmt.close();
-			}catch(Exception e) {
+			} catch (Exception e) {
 				System.out.println(e.getMessage());
 			}
 		}
 	}
 
 	public static void close(ResultSet rs) {
-		if(rs != null) {
+		if (rs != null) {
 			try {
 				rs.close();
-			}catch(Exception e) {
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+		}
+	}
+
+	public static void close(Statement stmt) {
+		if (stmt != null) {
+			try {
+				stmt.close();
+			} catch (Exception e) {
 				System.out.println(e.getMessage());
 			}
 		}
 	}
 
 	public static void close(PreparedStatement pstmt) {
-		if(pstmt != null) {
+		if (pstmt != null) {
 			try {
 				pstmt.close();
-			}catch(Exception e) {
+			} catch (Exception e) {
 				System.out.println(e.getMessage());
 			}
 		}
