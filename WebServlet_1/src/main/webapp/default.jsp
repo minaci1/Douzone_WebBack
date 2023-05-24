@@ -30,7 +30,21 @@
 	<br>
 	<a href="<%= request.getContextPath()%>/Board?cmd=login">보안페이지 로그인 처리</a>
 	<br>
-	 
+	
+	
+	<h3> FrontServletController 서블릿 만들고 ..</h3>
+	<a href="<%= request.getContextPath()%>/action.do?cmd=greeting">GET요청...</a>
+	<br>
+	<!-- 
+	문제
+	com.kosa > FrontServletController 서블릿 생성 > /action.do > deGET() 코드작업
+	view page> webapp > greeting.jsp
+	cmd=greeting >> greeting 문자열이라면 Message 객체를 생성하고 .. 함수 parameter로 >> greeting 제공
+	데이터 저장 >> msg 객체를 저장
+	뷰페이지 >> greeting.jsp 
+	뷰페이지 >> 객체 출력 (주소값 출력하세요)
+	 -->
+	
 	
 </body>
 </html>
