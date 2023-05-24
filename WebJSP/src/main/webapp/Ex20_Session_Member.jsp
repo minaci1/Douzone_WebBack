@@ -5,7 +5,7 @@
 		//로그인하지 않는 사용자는 올 수 없어요 
 		//session >> memberid 유무 >> 성공(id ....)
 		String memberid = (String)session.getAttribute("memberid");
-		boolean loginstate = (memberid == null) ? false : true;
+		boolean loginstate = (memberid == null) ? false : true; //loginstate가 null이면 false이고 아니면 true이다.
 %>    
 <!DOCTYPE html>
 <html>

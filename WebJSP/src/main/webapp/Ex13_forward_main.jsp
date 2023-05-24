@@ -43,7 +43,7 @@
 <jsp:forward page ="<%=viewurl %>"></jsp:forward>    
 <!-- 
 forward 가지고 있는 페이지는 아래 있는 내용이 의미 없다
-Buffer 비루고 그 buffer에 forward 페이지 내용을 담아요 -->
+Buffer 비우고 그 buffer에 forward 페이지 내용을 담아요 -->
 
 
 <!DOCTYPE html>

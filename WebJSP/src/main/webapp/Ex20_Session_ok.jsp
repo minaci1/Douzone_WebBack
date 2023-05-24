@@ -22,7 +22,7 @@
 		//로그인 성공
 		//session 객체 >> Scope >> WAS >> 내에서 사용가능 (WEBAPP 내에서 모든 페이지가 사용)
 		//POINT >> session 객체 >>  (WEBAPP 내에서 모든 페이지가 사용)
-		session.setAttribute("memberid", uid); //
+		session.setAttribute("memberid", uid); //memberid 로 집어 넣었다. 
 		//memberid 세션변수는 모든 다른 페이지에서 사용가능 ^^~~~~~~~~~~~
 		success =true;
 	}
