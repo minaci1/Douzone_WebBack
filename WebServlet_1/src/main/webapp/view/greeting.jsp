@@ -7,8 +7,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h3>FrontServletController 에서 전달된(request) 데이터 출력</h3>
+	<h3>VIEW PAGE</h3>
+	UI코드 담당
+	<hr>
 	결과출력 : <%= request.getAttribute("msg") %>
+	<hr>
 	결과출력 : <%= request.getAttribute("msgobj") %>
+	<hr>
+	EL : ${requestScope.msg}<br>
 </body>
 </html>
