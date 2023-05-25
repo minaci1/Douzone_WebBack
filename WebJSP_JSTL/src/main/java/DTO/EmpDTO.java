@@ -1,10 +1,8 @@
 package DTO;
 
-
-import java.sql.Date;
+import java.util.Date;
 
 import lombok.Data;
-
 @Data
 public class EmpDTO {
 	private int empno;
