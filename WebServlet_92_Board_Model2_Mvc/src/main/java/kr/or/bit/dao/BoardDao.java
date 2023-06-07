@@ -101,8 +101,8 @@ public class BoardDao {
 	}
 
 	//게시물 목록보기
-	public List<Board> list(int cpage , int pagesize){
-		/*
+	public List<Board> list(int cpage , int pagesize){ //중요 
+		/* 논리는 자바에서 만들기 
 		  [1][2][3][4][5][다음]
 		  [이전][6][7][8][9][10][다음]
 		  [이전][11][12]	
@@ -360,6 +360,7 @@ public class BoardDao {
 						 //트랜잭션 (둘다 처리 , 둘다 실패)
 						 //두개를 하나의 논리적 단위
 						 //JDBC : auto commit 
+						 //정말 중요함 덧글 지우고 원글지우는게 한개의 트랜잭션으로 이루어져야 한다.
 						 conn.setAutoCommit(false);//개발자가 rollback , commit 강제
 						 	//댓글삭제
 						 	pstmt = conn.prepareStatement(sql_reply);
@@ -525,7 +526,7 @@ public class BoardDao {
 			return row;
 		}
 
-	//게시글 상세 (답글 쓰기) 
+	//게시글 상세 (답글 쓰기)  //원본글 필요 // 핵심!
 	public int reWriteOk(Board boardata) {
 		//content.jsp ->(답글)-> rewrite.jsp(입력) -> submit() -> rewriteok.jsp 
 		//게시물 글쓰기(INSERT > 답글 ....) : refer , step , depth

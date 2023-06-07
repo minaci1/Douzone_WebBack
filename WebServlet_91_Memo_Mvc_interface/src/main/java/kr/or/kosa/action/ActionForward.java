@@ -1,17 +1,16 @@
 package kr.or.kosa.action;
 
 /*
- servlet (client) 요청
- 
- 1. 화면을 주세요 (UI 경로 필요)
- 2. 처리해 주세요 (SERVICE 필요)
+servelt(front) 요청 받아요
+1. 화면보여주세요
+2. 로직 처리해 주세요  
+  
+화면 아니면 로직  
+*/
 
-화면 아니면 로직처리 
- */
 public class ActionForward {
-	private boolean isRedirect =false; //뷰의 전환 ( redirect or forward) 
-	private String path = null; // 이동경로 ( 뷰의 주소)
-	
+	private boolean isRedirect=false; //뷰의 전환 여부  ...redirect or  forward
+	private String path=null; //이동 경로 (뷰의 주소)
 	
 	public boolean isRedirect() {
 		return isRedirect;
@@ -25,8 +24,6 @@ public class ActionForward {
 	public void setPath(String path) {
 		this.path = path;
 	}
-	
-	
 	
 	
 }

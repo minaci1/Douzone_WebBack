@@ -27,7 +27,7 @@ public class BoardEditOk implements Action {
 				
 			}else {
 								
-				int result = dao.boardEdit(request);
+				int result = dao.boardEdit(request); //boardEdit 에서 request 받아왔다
 				
 				if (result > 0) {
 					msg = "edit success";

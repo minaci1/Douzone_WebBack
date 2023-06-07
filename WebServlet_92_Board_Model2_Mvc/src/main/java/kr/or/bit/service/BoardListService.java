@@ -27,7 +27,7 @@ public class BoardListService implements Action {
 			String ps = request.getParameter("ps"); // pagesize
 			String cp = request.getParameter("cp"); // current page
 
-			// List 페이지 처음 호출 ...
+			// List 페이지 처음 호출 ... //5개 묶어서1부터 보겠다 
 			if (ps == null || ps.trim().equals("")) {
 				// default 값 설정
 				ps = "5"; // 5개씩
@@ -38,18 +38,18 @@ public class BoardListService implements Action {
 				cp = "1"; // 1번째 페이지 보겠다
 			}
 
-			int pagesize = Integer.parseInt(ps);
-			int cpage = Integer.parseInt(cp);
+			int pagesize = Integer.parseInt(ps); // 5개 묶고 
+			int cpage = Integer.parseInt(cp); //
 			int pagecount = 0;
 
 			// 23건 % 5
 			if (totalboardcount % pagesize == 0) {
 				pagecount = totalboardcount / pagesize; // 20 << 100/5
 			} else {
-				pagecount = (totalboardcount / pagesize) + 1;
+				pagecount = (totalboardcount / pagesize) + 1; // 내용이 안떨어지니까 한개 페이지 더 만들어
 			}
 
-			// 102건 : pagesize=5 >> pagecount=21페이지
+			// 102건 : pagesize=5 개씩 넣겟다 >> pagecount=21페이지
 
 			// 전체 목록 가져오기
 			List<Board> list = dao.list(cpage, pagesize); // list >> 1 , 20

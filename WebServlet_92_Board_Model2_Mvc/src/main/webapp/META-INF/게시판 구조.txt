@@ -84,16 +84,45 @@ create table multiboard(
 
 
 내가 읽은글 기준 select ref와 depth 알고 있고 depth와 step +1 해주기 ( 같은 그룹안에서 step 같을 수 없다.)
-step: update 해야함 
+step: update 해야함 // 나보다 큰 스텝이 있어? 없으면 1+1 
 
+case_1
 시퀀스    왕
 idx ,  ref  , depth , step ,   		title
-1       1       0      0       					원본글
-2       1       1      1						원본글 	  답글 1-1
-3       1       1      2						step + 1 같은 ref >> 동일 step(x)
-												같은 ref 현재 read step 큰 step은 >> step +1
+1       1       0      0       					        원본글
+2       1       1      1+1 > 2 >3						원본글 	  답글 1-1 
+3       1       1      1+1 > 2		                    step + 1 같은 ref >> 동일 step(x)
+4		1		1	   1							    같은 ref 현재 read step 큰 step은 >> step +1
 												
-												
+case_2
+시퀀스    왕
+idx ,  ref  , depth , step ,   		title
+1       1       0      0       					        원본글
+2       1       1      3						        원본글 	  답글 1-1 
+3       1       1      2		                        원본글 	  답글
+4		1		1	   1							    원본글 	  답글
+
+5       2       0      0								원본글      5
+6       2       1      1+1 > 2						    원본글      5의 답글 
+7       2       2      2+1 > 3					        6번 답글의 답글
+8		2		1	   1								원본글 5의 답글
+
+
+														
+>> 일반 select * from board order by idx desc;  최신글이 위에..
+>> 계층 select * from board order by ref desc, step asc;
+
+
+5번글 >> 8번 >> 6번 >> 7번 >> 1번 >> 4 >>3 >>2
+최신글 앞으로 보냄 
+
+case_3
+시퀀스    왕
+idx ,  ref  , depth , step ,   		title
+1       1       0      0       					        원본글
+2       1       1      1+1 > 2 >3						원본글 	  답글 1-1 
+3       1       1      1+1 > 2		                    step + 1 같은 ref >> 동일 step(x)
+4		1		1	   1							    같은 ref 현재 read step 큰 step은 >> step +1												
 												
 												
 												

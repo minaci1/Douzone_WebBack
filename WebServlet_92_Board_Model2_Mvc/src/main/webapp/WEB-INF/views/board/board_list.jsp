@@ -18,13 +18,22 @@
 	<c:import url="/WEB-INF/views/include/header.jsp" />
 	게시판 목록
 	<br>
+<!--
+utill 에 ThePager에 넣어옴 		
+			request.setAttribute("pagesize", pagesize);
+			request.setAttribute("cpage", cpage);
+			request.setAttribute("pagecount", pagecount);
+			request.setAttribute("list", list);
+			request.setAttribute("totalboardcount", totalboardcount);
+			request.setAttribute("pager", pager);
+-->
 
-	<c:set var="pagesize" value="${requestScope.pagesize}" />
-	<c:set var="cpage" value="${requestScope.cpage}" />
-	<c:set var="pagecount" value="${requestScope.pagecount}" />
-	<c:set var="list" value="${requestScope.list}" />
+	<c:set var="pagesize"       value="${requestScope.pagesize}" />
+	<c:set var="cpage"          value="${requestScope.cpage}" />
+	<c:set var="pagecount"      value="${requestScope.pagecount}" />
+	<c:set var="list"           value="${requestScope.list}" />
 	<c:set var="totalboardcount" value="${requestScope.totalboardcount}" />
-	<c:set var="pager" value="${requestScope.pager}" />
+	<c:set var="pager"          value="${requestScope.pager}" />
 	
 	<div id="pagecontainer">
 		<div style="padding-top: 30px; text-align: cetner">
@@ -35,7 +44,7 @@
 							form 태그 action 전송 주소(목적지) >> submit()
 							>> form name="list" ... action 없다면.. 
 							>> [현재 URL 창에 있는 주소] 그대로  .....   
-							>> board_list.jsp?ps=select 태그 값으로 .... 다시 호출 .....
+							>> board_list.jsp?ps=select 태그 값으로 .... 다시 호출 .....ps 가 파라미터로 간다..
 							>>http://192.168.0.169:8090/WebServlet_5_Board_Model1_Sample/board/board_list.jsp?ps=10					
 						-->
 						<form name="list" >
@@ -64,7 +73,7 @@
 				</tr>
 				<!-- 데이터가 한건도 없는 경우  -->
 
-				<!-- forEach()  목록 출력하기  -->
+				<!-- forEach()  목록 출력하기 서버에서 해석된다. -->
 				<c:forEach var="board" items="${list}">
 					<tr onmouseover="this.style.backgroundColor='gray'" onmouseout="this.style.backgroundColor='white'">
 						<td align="center">${board.idx}</td>
@@ -73,8 +82,9 @@
 								&nbsp;&nbsp;&nbsp;
 							</c:forEach>
 							<c:if test="${board.depth > 0}">
-								<img src="${pageContext.request.contextPath}/images/re.gif">
+								<img src="${pageContext.request.contextPath}/images/re.gif"> <!-- ㄴ자 이미지 -->
 							</c:if>
+							<!-- 현재 위치 가지고 가 (옵션) -->
 							<a href="BoardContent.do?idx=${board.idx}&cp=${cpage}&ps=${pagesize}">
 								<c:choose>
 									<c:when test="${board.subject != null && fn:length(board.subject) > 10}">

@@ -10,7 +10,6 @@ import kr.or.kosa.action.Action;
 import kr.or.kosa.action.ActionForward;
 import kr.or.kosa.dao.MemoDao;
 import kr.or.kosa.dto.Memo;
-import kr.or.kosa.dto.MemoDto;
 
 public class MemoListService implements Action {
 
@@ -19,8 +18,8 @@ public class MemoListService implements Action {
 		
 		ActionForward forward=null;
     	try {
-    		 MemoDao dao = new MemoDao(); 
-			 List<MemoDto> memolist = dao.getMemoList();
+    		 MemoDao dao = new MemoDao();
+			 List<Memo> memolist = dao.getMemoList();
 			 request.setAttribute("memolist", memolist);
 			 
 			 forward = new ActionForward();

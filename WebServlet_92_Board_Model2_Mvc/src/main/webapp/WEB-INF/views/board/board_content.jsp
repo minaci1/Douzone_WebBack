@@ -56,7 +56,7 @@
 					<tr>
 						<td colspan="4" align="center"><a
 							href="BoardList.do?cp=${cpage}&ps=${pagesize}">목록가기</a> |<a
-							href="BoardEdit.do?idx=${idx}&cp=${cpage}&ps=${pagesize}">편집</a> |<a
+							href="BoardEdit.do?idx=${idx}&cp=${cpage}&ps=${pagesize}">편집</a> |<a 
 							href="BoardDelete.do?idx=${idx}&cp=${cpage}&ps=${pagesize}">삭제</a>
 							|<a
 							href="BoardRewrite.do?idx=${idx}&cp=${cpage}&ps=${pagesize}&subject=${board.subject}">답글</a>

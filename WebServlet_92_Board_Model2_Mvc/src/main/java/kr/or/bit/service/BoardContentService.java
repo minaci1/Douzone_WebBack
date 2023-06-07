@@ -23,8 +23,8 @@ public class BoardContentService implements Action {
 		String cpage = request.getParameter("cp"); // current page
 		String pagesize = request.getParameter("ps"); // pagesize
 		
-		Board board = new Board();
-		List<Reply> replyList = new ArrayList<>();
+		Board board = new Board(); //board
+		List<Reply> replyList = new ArrayList<>(); // 게시글의 덧글 
 		
 		boolean isread = false;
 
@@ -64,7 +64,7 @@ public class BoardContentService implements Action {
 			request.setAttribute("idx", idx);
 			request.setAttribute("cp", cpage);
 			request.setAttribute("ps", pagesize);
-			request.setAttribute("replyList", replyList);
+			request.setAttribute("replyList", replyList); //each 돌려서 뿌리고 
 			
 			forward = new ActionForward();
 			forward.setRedirect(false); // forward

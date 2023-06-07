@@ -38,7 +38,7 @@ public class BoardRewriteService implements Action {
 		
 		ActionForward forward = new ActionForward();
 		forward.setRedirect(false);
-		forward.setPath("/WEB-INF/views/board/board_rewrite.jsp");
+		forward.setPath("/WEB-INF/views/board/board_rewrite.jsp"); //디비 작업 따로 필요 없다.
 		
 		
 		return forward;

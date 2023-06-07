@@ -1,5 +1,6 @@
 package kr.or.bit.dto;
 
+//참고용 
 public class product {
 
 	private String name;

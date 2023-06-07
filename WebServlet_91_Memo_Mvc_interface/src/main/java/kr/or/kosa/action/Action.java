@@ -1,10 +1,13 @@
 package kr.or.kosa.action;
 
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-//서비스 클래스의 모든 함수는 동일한 리턴타입과 parameter 가지고 사용됐으면 좋겠어
+
+
+//생성하는 모든 서비스는 Action 인터페이스를 구현했으면 좋겠다
+
 public interface Action {
-	public ActionForward execute(HttpServletRequest request, HttpServletResponse response);
+	public ActionForward execute(HttpServletRequest request , HttpServletResponse response);
 }
+

@@ -7,7 +7,6 @@ import kr.or.kosa.action.Action;
 import kr.or.kosa.action.ActionForward;
 import kr.or.kosa.dao.MemoDao;
 import kr.or.kosa.dto.Memo;
-import kr.or.kosa.dto.MemoDto;
 
 public class MemoAddService implements Action {
 
@@ -20,7 +19,7 @@ public class MemoAddService implements Action {
   	  String memo = request.getParameter("content");
 		
   	  MemoDao dao = new MemoDao();
-  	  int result = dao.insertMemo(new MemoDto(id,email,memo));
+  	  int result = dao.insertMemo(new Memo(id,email,memo));
   	  
   	  //규칙 (성공,실패하던  msg 작성되고 조건에 이동하는 페이지가 생성)
   	  String msg="";

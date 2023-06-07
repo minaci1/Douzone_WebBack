@@ -8,72 +8,80 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import kr.or.kosa.action.Action;
 import kr.or.kosa.action.ActionForward;
-import kr.or.kosa.service.MemoListServiceAction;
-import kr.or.kosa.service.MemoWriteServiceAction;
+import kr.or.kosa.service.MemoAddService;
+import kr.or.kosa.service.MemoIdCheckService;
+import kr.or.kosa.service.MemoListService;
 
- 
-@WebServlet("*.do")//MemoServlet.do
+
+
+@WebServlet("*.memo")
 public class FrontMemoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
   
- 
-	private void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public FrontMemoController() {
+        super();
+        
+    }
+    private void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		//1. 한글처리
-		request.setCharacterEncoding("UTF-8");
-		
-		String requestUri = request.getRequestURI();
+    	//request.setCharacterEncoding("UTF-8");
+    	//필터 한글 처리 고민 하지 마세요 ....
+    	
+       	String requestURI = request.getRequestURI();
     	String contextPath = request.getContextPath();
-    	String urlcommand = requestUri.substring(contextPath.length());
+    	String urlcommand = requestURI.substring(contextPath.length());
     	
-    
-    	System.out.println("requestUri : " + requestUri);
-    	System.out.println("contextPath : " + contextPath);
-    	System.out.println("urlcommand : " + urlcommand);
-    	
-    	
+
     	Action action=null;
     	ActionForward forward=null;
     	
-    	//Client 요청 (1.화면주세요(service 필요없어요) 2.처리해주세요(별도의 service 필요)
-    	if(urlcommand.equals("/memoForm.do")) {
+    	if(urlcommand.equals("/MemoAdd.memo")) {  //글쓰기 처리
+    		//UI + 로직
+    		action = new MemoAddService();
+    		forward = action.execute(request, response);
+    		
+    	}else if(urlcommand.equals("/MemoList.memo")) { //목록보기
+    		//UI + 로직
+    		action = new MemoListService();
+    		forward = action.execute(request, response);
+    		
+    	}else if(urlcommand.equals("/MemoId.memo")) { //비동기 사용유뮤(별도의 servlet)
+    		//UI + 로직
+    		//비동기도 동일한 로직으로 처리할 것이냐 고민 ^^
+    		action = new MemoIdCheckService();
+    		forward = action.execute(request, response);
+    	}else if(urlcommand.equals("/MemoView.memo")) {  //만약 상세보기 있다면
+    		//UI 제공
     		forward = new ActionForward();
     		forward.setRedirect(false);
-    		forward.setPath("/WEB-INF/views/memo/memoForm.jsp");
-    	}else if(urlcommand.equals("/MemoList.do")) {
-    		
-    		action = new MemoListServiceAction();
-    		forward = action.execute(request, response);
-    		
-    	}else if(urlcommand.equals("/Memowrite.do")) {
-    		action = new MemoWriteServiceAction();
-    		forward = action.execute(request, response);
+    		forward.setPath("/WEB-INF/views/memoview.jsp");
     	}
     	
-    	
-    	
-    	
-    	if(forward.isRedirect()) {
-    		response.sendRedirect(forward.getPath());
-    	}else {
-    		
-    		RequestDispatcher dis = request.getRequestDispatcher(forward.getPath());
-    		dis.forward(request, response);
+    	if(forward != null) {
+    		if(forward.isRedirect()) { //true 페이지 재 요청 (location.href="페이지"
+    			response.sendRedirect(forward.getPath());
+    		}else { //기본적으로 forward ....
+    			    //1. UI 전달된 경우
+    			    //2. UI + 로직
+    			RequestDispatcher dis = request.getRequestDispatcher(forward.getPath());
+    			dis.forward(request, response);
+    		}
     	}
 	}
-		
-		
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doProcess(request,response);
+		
+		doProcess(request, response);
 	}
 
-	 
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doProcess(request,response);
+		
+		doProcess(request, response);
 	}
 
 }
